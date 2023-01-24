@@ -12,13 +12,41 @@ const getDefaultCart = () => {
   return cart;
 };
 export const ShopcontexProvider = (props) => {
-  const [cartItem, setCartItems] = useState(getDefaultCart());
+  const [cartItem, setCartItems] = useState([]);
 
-  const addTocart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  const addTocart = (data) => {
+    if (!cartItem.find((product) => product.id === Number(data.id))) {
+      const product = { ...data, number: 1 };
+      cartItem.push(product);
+      console.log(cartItem);
+    } else {
+      const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
+      console.log("productIndex", productIndex);
+      console.log(
+        "rtItem[productIndex].number += 1",
+        (cartItem[productIndex].number += 1)
+      );
+
+      console.log(cartItem);
+      setCartItems(cartItem);
+    }
   };
-  const removeFromcart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  const removeFromcart = (data) => {
+    if (!cartItem.find((product) => product.id === Number(data.id))) {
+      const product = { ...data, number: 1 };
+      cartItem.push(product);
+      console.log(cartItem);
+    } else {
+      const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
+      console.log("productIndex", productIndex);
+      console.log(
+        "rtItem[productIndex].number += 1",
+        (cartItem[productIndex].number -= 1)
+      );
+
+      console.log(cartItem);
+      setCartItems(cartItem);
+    }
   };
   const adduserInputnumber = (itemId, number) => {
     setCartItems((prev) => ({ ...prev, [itemId]: number }));
