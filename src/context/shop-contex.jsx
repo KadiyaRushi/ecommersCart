@@ -23,11 +23,22 @@ export const ShopcontexProvider = (props) => {
   const adduserInputnumber = (itemId, number) => {
     setCartItems((prev) => ({ ...prev, [itemId]: number }));
   };
+  const getTotal = () => {
+    let totalAmount = 0;
+    for (const item in cartItem) {
+      if (cartItem[item] > 0) {
+        let itemInfo = PRODUCTS.find((product) => product.id === Number(item));
+        totalAmount = totalAmount + cartItem[item] * itemInfo.price;
+      }
+    }
+    return totalAmount;
+  };
   const contexvalue = {
     cartItem,
     addTocart,
     removeFromcart,
     adduserInputnumber,
+    getTotal,
   };
   return (
     <Shopcontex.Provider value={contexvalue}>

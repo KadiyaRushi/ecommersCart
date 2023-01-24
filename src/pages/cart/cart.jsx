@@ -4,18 +4,12 @@ import { useContext } from "react";
 import { PRODUCTS } from "../../products";
 import { Shopcontex } from "../../context/shop-contex";
 import { CartItem } from "./cart-item";
+import { useNavigate } from "react-router-dom";
 export const Cart = () => {
-  const { cartItem } = useContext(Shopcontex);
-  const getTotal = () => {
-    let totalAmount = 0;
-    for (const item in cartItem) {
-      if (cartItem[item] > 0) {
-        let itemInfo = PRODUCTS.find((product) => product.id === Number(item));
-        totalAmount = totalAmount + cartItem[item] * itemInfo.price;
-      }
-    }
-    return totalAmount;
-  };
+  const { cartItem, getTotal } = useContext(Shopcontex);
+  const totalAmount = getTotal();
+
+  const navigate = useNavigate();
   return (
     <div className="cart">
       <div>
@@ -28,11 +22,15 @@ export const Cart = () => {
           }
         })}
       </div>
-      <div className="checkout">
-        <p>Subtotal:$ {getTotal()}</p>
-        <button>Continu Shopping</button>
-        <button>Checkout</button>
-      </div>
+      {totalAmount > 0 ? (
+        <div className="checkout">
+          <p>Subtotal:$ {getTotal()}</p>
+          <button onClick={() => navigate("/")}>Continu Shopping</button>
+          <button>Checkout</button>
+        </div>
+      ) : (
+        <h1>Your Cart Is Empty</h1>
+      )}
     </div>
   );
 };
