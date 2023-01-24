@@ -4,8 +4,8 @@ import { Shopcontex } from "../../context/shop-contex";
 export const Product = (props) => {
   const { id, title, price, images } = props.data;
   const { addTocart, cartItem } = useContext(Shopcontex);
-  // const productIndex = cartItem.findIndex((obj) => obj.id == id);
-  const cartitemnumber = cartItem[id];
+
+  const cartItemnumber = 0;
   return (
     <div className="product">
       <img src={images[0]} />
@@ -14,7 +14,7 @@ export const Product = (props) => {
         <p>${price}</p>
       </div>
       <button className="addToCartBttn" onClick={() => addTocart(props.data)}>
-        Add To Cart{cartitemnumber > 0 && <>({cartitemnumber})</>}
+        Add To Cart{cartItemnumber > 0 && <>({cartItemnumber})</>}
       </button>
     </div>
   );

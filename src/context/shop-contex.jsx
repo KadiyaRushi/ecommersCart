@@ -34,25 +34,27 @@ export const ShopcontexProvider = (props) => {
       setCartItems(NewcartItem);
     } else {
       const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
-      console.log("productIndex", productIndex);
+
       console.log(
         "rtItem[productIndex].number -= 1",
         (cartItem[productIndex].number -= 1)
       );
+      const newcartItem = cartItem[productIndex].number - 1;
 
-      console.log("Data from remove", data);
       setCartItems(cartItem);
     }
   };
-  const adduserInputnumber = (itemId, number) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: number }));
+  const adduserInputnumber = (data, number) => {
+    const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
+    cartItem[productIndex].number = number;
+    setCartItems(cartItem);
   };
   const getTotal = () => {
     let totalAmount = 0;
     for (const item in cartItem) {
-      if (cartItem[item] > 0) {
-        let itemInfo = PRODUCTS.find((product) => product.id === Number(item));
-        totalAmount = totalAmount + cartItem[item] * itemInfo.price;
+      if (cartItem[item].number > 0) {
+        console.log(cartItem[item].number);
+        totalAmount = cartItem[item].number * cartItem[item].price;
       }
     }
     return totalAmount;

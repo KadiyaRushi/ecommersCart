@@ -4,7 +4,7 @@ export const CartItem = (props) => {
   const { id, title, price, images } = props.data;
   const { cartItem, addTocart, removeFromcart, adduserInputnumber } =
     useContext(Shopcontex);
-
+  const productIndex = cartItem.findIndex((obj) => obj.id == id);
   return (
     <div className="cartItem">
       <img src={images[0]} />
@@ -24,9 +24,9 @@ export const CartItem = (props) => {
             +
           </button>
           <input
-            value={cartItem[id]}
+            value={cartItem[productIndex].number}
             onChange={(e) => {
-              adduserInputnumber(id, Number(e.target.value));
+              adduserInputnumber(props.data, Number(e.target.value));
             }}
           />
           <button
