@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Shopcontex } from "../../context/shop-contex";
 export const CartItem = (props) => {
-  const { id, title, price, images } = props.data;
+  const { id, title, price, images, description } = props.data;
   const { cartItem, addTocart, removeFromcart, adduserInputnumber } =
     useContext(Shopcontex);
   const productIndex = cartItem.findIndex((obj) => obj.id == id);
+
   return (
     <div className="cartItem">
       <img src={images[0]} />
@@ -12,6 +13,7 @@ export const CartItem = (props) => {
         <p>
           <b>{title}</b>
         </p>
+        <p id="desPtag">{description}</p>
         <p>
           <b>${price}</b>
         </p>

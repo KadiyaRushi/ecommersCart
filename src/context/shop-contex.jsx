@@ -1,62 +1,71 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import { PRODUCTS } from "../products";
 
 export const Shopcontex = createContext(null);
 
 export const ShopcontexProvider = (props) => {
   const [cartItem, setCartItems] = useState([]);
-  const [responseData, setResponseData] = useState({});
+  const [responseData, setResponseData] = useState();
 
   const addTocart = (data) => {
     if (!cartItem.find((product) => product.id === Number(data.id))) {
       const product = { ...data, number: 1 };
       cartItem.push(product);
-      console.log(cartItem);
     } else {
       const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
-      console.log("productIndex", productIndex);
-      console.log(
-        "rtItem[productIndex].number += 1",
-        (cartItem[productIndex].number += 1)
-      );
 
-      console.log(cartItem);
-      setCartItems(cartItem);
+      const ItemQuentity = cartItem[productIndex].number;
+      const NewCartItem = cartItem.map((product) => {
+        if (product.id === data.id) {
+          return { ...product, number: ItemQuentity + 1 };
+        } else {
+          return product;
+        }
+      });
+      setCartItems(NewCartItem);
     }
   };
+
   const removeFromcart = (data) => {
     if (data.number === 0) {
-      // const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
       const NewcartItem = cartItem.filter((item) => item.id !== data.id);
 
       setCartItems(NewcartItem);
     } else {
       const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
 
-      console.log(
-        "rtItem[productIndex].number -= 1",
-        (cartItem[productIndex].number -= 1)
-      );
-      const newcartItem = cartItem[productIndex].number - 1;
-
-      setCartItems(cartItem);
+      const ItemQuentity = cartItem[productIndex].number;
+      const newCartItem = cartItem.map((product) => {
+        if (product.id === data.id) {
+          return { ...product, number: ItemQuentity - 1 };
+        } else {
+          return product;
+        }
+      });
+      setCartItems(newCartItem);
     }
   };
+
   const adduserInputnumber = (data, number) => {
     const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
     cartItem[productIndex].number = number;
     setCartItems(cartItem);
+    return number;
   };
+
   const getTotal = () => {
     let totalAmount = 0;
-    for (const item in cartItem) {
+
+    for (let item in cartItem) {
+      console.log(cartItem);
       if (cartItem[item].number > 0) {
         console.log(cartItem[item].number);
-        totalAmount = cartItem[item].number * cartItem[item].price;
+        totalAmount += cartItem[item].number * cartItem[item].price;
+        console.log(cartItem[item]);
       }
     }
+
     return totalAmount;
   };
 

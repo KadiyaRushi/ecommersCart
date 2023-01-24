@@ -6,7 +6,7 @@ import { Shopcontex } from "../../context/shop-contex";
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
 export const Cart = () => {
-  const { cartItem, getTotal, responseData } = useContext(Shopcontex);
+  const { cartItem, getTotal } = useContext(Shopcontex);
   const totalAmount = getTotal();
 
   const navigate = useNavigate();
