@@ -1,18 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 import { PRODUCTS } from "../products";
 
 export const Shopcontex = createContext(null);
-const getDefaultCart = () => {
-  let cart = {};
-  for (let i = 1; i <= PRODUCTS.length; i++) {
-    cart[i] = 0;
-  }
-  return cart;
-};
+
 export const ShopcontexProvider = (props) => {
   const [cartItem, setCartItems] = useState([]);
+  const [responseData, setResponseData] = useState({});
 
   const addTocart = (data) => {
     if (!cartItem.find((product) => product.id === Number(data.id))) {
@@ -32,19 +27,20 @@ export const ShopcontexProvider = (props) => {
     }
   };
   const removeFromcart = (data) => {
-    if (!cartItem.find((product) => product.id === Number(data.id))) {
-      const product = { ...data, number: 1 };
-      cartItem.push(product);
-      console.log(cartItem);
+    if (data.number === 0) {
+      // const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
+      const NewcartItem = cartItem.filter((item) => item.id !== data.id);
+
+      setCartItems(NewcartItem);
     } else {
       const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
       console.log("productIndex", productIndex);
       console.log(
-        "rtItem[productIndex].number += 1",
+        "rtItem[productIndex].number -= 1",
         (cartItem[productIndex].number -= 1)
       );
 
-      console.log(cartItem);
+      console.log("Data from remove", data);
       setCartItems(cartItem);
     }
   };
@@ -61,12 +57,30 @@ export const ShopcontexProvider = (props) => {
     }
     return totalAmount;
   };
+
+  const ProductItem = async () => {
+    try {
+      const res = await fetch("https://dummyjson.com/products");
+      const data = await res.json();
+      console.log("data", data);
+      setResponseData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    ProductItem();
+  }, []);
+
   const contexvalue = {
+    responseData,
     cartItem,
     addTocart,
     removeFromcart,
     adduserInputnumber,
     getTotal,
+    ProductItem,
   };
   return (
     <Shopcontex.Provider value={contexvalue}>

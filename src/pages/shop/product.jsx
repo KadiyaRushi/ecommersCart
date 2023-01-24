@@ -4,6 +4,7 @@ import { Shopcontex } from "../../context/shop-contex";
 export const Product = (props) => {
   const { id, title, price, images } = props.data;
   const { addTocart, cartItem } = useContext(Shopcontex);
+  // const productIndex = cartItem.findIndex((obj) => obj.id == id);
   const cartitemnumber = cartItem[id];
   return (
     <div className="product">

@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { Shopcontex } from "../../context/shop-contex";
 export const CartItem = (props) => {
-  const { id, productName, price, productImage } = props.data;
+  const { id, title, price, images } = props.data;
   const { cartItem, addTocart, removeFromcart, adduserInputnumber } =
     useContext(Shopcontex);
 
   return (
     <div className="cartItem">
-      <img src={productImage} />
+      <img src={images[0]} />
       <div className="description">
         <p>
-          <b>{productName}</b>
+          <b>{title}</b>
         </p>
         <p>
           <b>${price}</b>
@@ -18,7 +18,7 @@ export const CartItem = (props) => {
         <div>
           <button
             onClick={() => {
-              addTocart(id);
+              addTocart(props.data);
             }}
           >
             +
@@ -31,7 +31,7 @@ export const CartItem = (props) => {
           />
           <button
             onClick={() => {
-              removeFromcart(id);
+              removeFromcart(props.data);
             }}
           >
             -
