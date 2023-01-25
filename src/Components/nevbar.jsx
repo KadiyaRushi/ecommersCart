@@ -11,8 +11,10 @@ export const Nevbar = () => {
         <Link to="/">Shop</Link>
         <Link to="/cart">
           <div>
-            {/* <p>{cartItem}</p> */}
-            <ShoppingCart />
+            <p>
+              {" "}
+              <ShoppingCart /> {cartItem.length}
+            </p>
           </div>
         </Link>
       </div>

@@ -9,11 +9,12 @@ export const ShopcontexProvider = (props) => {
   const [cartItem, setCartItems] = useState([]);
   const [responseData, setResponseData] = useState();
   const [Loding, setLoding] = useState(true);
-  const [currentItemQuentity, setCurrentItemQuentity] = useState(0);
+
   const addTocart = (data) => {
     if (!cartItem.find((product) => product.id === Number(data.id))) {
       const product = { ...data, number: 1 };
-      cartItem.push(product);
+      const NewcartItem = [...cartItem, product];
+      setCartItems(NewcartItem);
     } else {
       const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
 
@@ -25,13 +26,11 @@ export const ShopcontexProvider = (props) => {
           return product;
         }
       });
-      getCurentItemQuentity(data);
+
       setCartItems(NewCartItem);
     }
   };
-  const getCurentItemQuentity = (data) => {
-    const productIndex = cartItem.findIndex((obj) => obj.id == data.id);
-  };
+
   const removeFromcart = (data) => {
     if (data.number === 0) {
       const NewcartItem = cartItem.filter((item) => item.id !== data.id);

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import { Product } from "./product";
 import "./shop.css";
@@ -6,7 +6,7 @@ import { Shopcontex } from "../../context/shop-contex";
 import { Loder } from "../../Components/fullpageLoder/Loder";
 
 export const Shop = () => {
-  const { responseData, Loding } = useContext(Shopcontex);
+  const { responseData } = useContext(Shopcontex);
 
   return (
     <div className="shop">
@@ -15,17 +15,15 @@ export const Shop = () => {
       </div>
 
       <div className="products">
-        <div className="products">
-          {responseData ? (
-            responseData?.products?.map((element) => (
-              <div>
-                <Product data={element} />
-              </div>
-            ))
-          ) : (
-            <Loder />
-          )}
-        </div>
+        {responseData ? (
+          responseData?.products?.map((element) => (
+            <div>
+              <Product data={element} />
+            </div>
+          ))
+        ) : (
+          <Loder />
+        )}
       </div>
     </div>
   );
