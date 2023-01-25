@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Shopcontex } from "../../context/shop-contex";
 export const Product = (props) => {
   const { id, title, price, images } = props.data;
-  const { addTocart, cartItem } = useContext(Shopcontex);
+  const { addTocart, cartItem, getCartItemValues } = useContext(Shopcontex);
 
   const cartItemnumber = 0;
   return (
