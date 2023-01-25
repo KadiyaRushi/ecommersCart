@@ -4,7 +4,7 @@ import { Plus, ShoppingCart } from "phosphor-react";
 import { Shopcontex } from "../context/shop-contex";
 import "./nevbar.css";
 export const Nevbar = () => {
-  const { cartItem } = useContext(Shopcontex);
+  const { getTotalItem } = useContext(Shopcontex);
   return (
     <div className="navbar">
       <div className="links">
@@ -13,7 +13,7 @@ export const Nevbar = () => {
           <div>
             <p>
               {" "}
-              <ShoppingCart />( {cartItem.length})
+              <ShoppingCart />( {getTotalItem()})
             </p>
           </div>
         </Link>

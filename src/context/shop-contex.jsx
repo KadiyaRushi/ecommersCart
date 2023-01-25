@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { createContext } from "react";
-import { Loder } from "../Components/fullpageLoder/Loder";
 
 export const Shopcontex = createContext(null);
 
@@ -62,11 +61,8 @@ export const ShopcontexProvider = (props) => {
     let totalAmount = 0;
 
     for (let item in cartItem) {
-      console.log(cartItem);
       if (cartItem[item].number > 0) {
-        console.log(cartItem[item].number);
         totalAmount += cartItem[item].number * cartItem[item].price;
-        console.log(cartItem[item]);
       }
     }
 
@@ -87,6 +83,18 @@ export const ShopcontexProvider = (props) => {
     }
   };
 
+  const getTotalItem = () => {
+    let totalItemNumber = 0;
+
+    for (let item in cartItem) {
+      if (cartItem[item].number > 0) {
+        totalItemNumber += cartItem[item].number;
+      }
+    }
+
+    return totalItemNumber;
+  };
+
   useEffect(() => {
     ProductItem();
   }, []);
@@ -100,6 +108,7 @@ export const ShopcontexProvider = (props) => {
     adduserInputnumber,
     getTotal,
     ProductItem,
+    getTotalItem,
   };
   return (
     <Shopcontex.Provider value={contexvalue}>

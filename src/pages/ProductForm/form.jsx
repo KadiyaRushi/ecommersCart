@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./form.css";
 export const Form = () => {
   const [Name, setName] = useState();
@@ -37,9 +39,30 @@ export const Form = () => {
         body: JSON.stringify(newData),
       })
         .then((res) => res.json())
+        .then(
+          toast.success("Data has added Successfully", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          })
+        )
         .then(console.log);
     } catch (error) {
-      console.log(error);
+      toast.error("🦄 Wow so easy!", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
@@ -51,25 +74,44 @@ export const Form = () => {
   }, [data]);
 
   return (
-    <div>
-      <form onSubmit={onSubmitHandler} className="form">
-        <div className="input">
-          <label> Product Name:</label>
-          <input value={Name} type="text" id="Name" onChange={nameChnagData} />
-        </div>
-        <div className="input">
-          <label>Product Pric:</label>
-          <input
-            value={Price}
-            type="number"
-            id="prise"
-            onChange={priceChnagData}
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-      <h1>{data.title}</h1>
-      <h1>{data.price}</h1>
-    </div>
+    <>
+      <div>
+        <form onSubmit={onSubmitHandler} className="form">
+          <div className="input">
+            <label> Product Name:</label>
+            <input
+              value={Name}
+              type="text"
+              id="Name"
+              required
+              onChange={nameChnagData}
+            />
+          </div>
+          <div className="input">
+            <label>Product Pric:</label>
+            <input
+              value={Price}
+              type="number"
+              id="prise"
+              required
+              onChange={priceChnagData}
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </>
   );
 };
