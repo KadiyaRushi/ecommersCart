@@ -1,30 +1,35 @@
-import React, { useContext, useState } from "react";
-import { Shopcontex } from "../../context/shop-contex";
+import React, { useState } from "react";
 
 export const Form = () => {
   const [Name, setName] = useState();
   const [Price, setPrice] = useState();
-  const [data, setData] = useState({
-    name: null,
-    price: null,
-  });
-  const AddProductToAPI = () => {};
+  const [data, setData] = useState({});
+
   const nameChnagData = (event) => {
-    event.preventdefault();
+    event.preventDefault();
     const newName = event.target.value;
+
     setName(newName);
   };
   const priceChnagData = (event) => {
-    event.preventdefault();
+    event.preventDefault();
     const newPrice = event.target.value;
-    setName(newPrice);
+
+    setPrice(newPrice);
   };
-  const onSubmitHandler = () => {
-    setData({
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    const newData = {
       name: Name,
       price: Price,
-    });
-    AddProductToAPI(data);
+    };
+
+    setData(newData);
+  };
+
+  const AddItemTOAPi = (data) => {
+    try {
+    } catch {}
   };
   return (
     <div className="form">
@@ -38,7 +43,10 @@ export const Form = () => {
           id="prise"
           onChange={priceChnagData}
         />
+        <button type="submit">Submit</button>
       </form>
+      <h1>{data.name}</h1>
+      <h1>{data.price}</h1>
     </div>
   );
 };
