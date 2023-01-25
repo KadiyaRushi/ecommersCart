@@ -83,19 +83,8 @@ export const ShopcontexProvider = (props) => {
       setResponseData(data);
       setLoding(false);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
-  };
-
-  const getCartItemValues = (data) => {
-    console.log("getCartItemValues", data);
-    console.log("CARTITEM", cartItem);
-
-    const product = cartItem.filter((product) => product.id == data.id);
-    console.log(product);
-
-    const totalitem = product.number;
-    return totalitem;
   };
 
   useEffect(() => {
@@ -111,7 +100,6 @@ export const ShopcontexProvider = (props) => {
     adduserInputnumber,
     getTotal,
     ProductItem,
-    getCartItemValues,
   };
   return (
     <Shopcontex.Provider value={contexvalue}>

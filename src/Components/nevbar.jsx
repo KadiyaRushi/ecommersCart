@@ -13,7 +13,7 @@ export const Nevbar = () => {
           <div>
             <p>
               {" "}
-              <ShoppingCart /> {cartItem.length}
+              <ShoppingCart />( {cartItem.length})
             </p>
           </div>
         </Link>

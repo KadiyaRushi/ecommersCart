@@ -6,6 +6,8 @@
 .products {
   display: grid;
   grid-template-columns: auto auto auto;
+  width: auto;
+  height: auto;
 }
 
 .product {
