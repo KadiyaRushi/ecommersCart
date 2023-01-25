@@ -4,11 +4,10 @@
   font-size: 40px;
 }
 .products {
-  width: 100%;
-  height: auto;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  place-items: center;
+  grid-template-columns: auto auto auto;
+  width: auto;
+  height: auto;
 }
 
 .product {
@@ -23,7 +22,9 @@
 }
 
 .product img {
-  width: 400px;
+  width: 100%;
+  border: 0.4px solid;
+  border-radius: 20px;
 }
 
 .product .description {

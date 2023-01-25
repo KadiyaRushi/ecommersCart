@@ -1,9 +1,14 @@
-import React from "react";
-import { PRODUCTS } from "../../products";
+import React, { useContext } from "react";
+
 import { Product } from "./product";
 import "./shop.css";
+import { Shopcontex } from "../../context/shop-contex";
+import { Loder } from "../../Components/fullpageLoder/Loder";
+import { Form } from "../ProductForm/form";
 
 export const Shop = () => {
+  const { responseData } = useContext(Shopcontex);
+
   return (
     <div className="shop">
       <div className="shopTitle">
@@ -11,9 +16,15 @@ export const Shop = () => {
       </div>
 
       <div className="products">
-        {PRODUCTS.map((product) => (
-          <Product data={product} />
-        ))}
+        {responseData ? (
+          responseData?.products?.map((element) => (
+            <div>
+              <Product data={element} />
+            </div>
+          ))
+        ) : (
+          <Loder />
+        )}
       </div>
     </div>
   );

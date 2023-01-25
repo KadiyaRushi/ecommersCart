@@ -1,37 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Shopcontex } from "../../context/shop-contex";
 export const CartItem = (props) => {
-  const { id, productName, price, productImage } = props.data;
+  const { id, title, price, images, description } = props.data;
   const { cartItem, addTocart, removeFromcart, adduserInputnumber } =
     useContext(Shopcontex);
+  const productIndex = cartItem.findIndex((obj) => obj.id == id);
 
   return (
     <div className="cartItem">
-      <img src={productImage} />
+      <img src={images[0]} />
       <div className="description">
         <p>
-          <b>{productName}</b>
+          <b>{title}</b>
         </p>
+        <p id="desPtag">{description}</p>
         <p>
           <b>${price}</b>
         </p>
         <div>
           <button
             onClick={() => {
-              addTocart(id);
+              addTocart(props.data);
             }}
           >
             +
           </button>
           <input
-            value={cartItem[id]}
+            value={cartItem[productIndex].number}
             onChange={(e) => {
-              adduserInputnumber(id, Number(e.target.value));
+              adduserInputnumber(props.data, Number(e.target.value));
             }}
           />
           <button
             onClick={() => {
-              removeFromcart(id);
+              removeFromcart(props.data);
             }}
           >
             -

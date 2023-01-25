@@ -17,12 +17,14 @@
 }
 
 .cartItem img {
-  width: 200px;
+  width: 30%;
+  border-radius: 10%;
+  margin: 20px;
 }
 
 .cartItem .description {
   width: 100%;
-  font-size: 30px;
+  font-size: 23px;
 }
 
 .countHandler input {
@@ -30,7 +32,9 @@
   text-align: center;
   font-weight: bolder;
 }
-
+#desPtag {
+  font-size: medium;
+}
 .checkout button {
   width: 150px;
   height: 50px;
