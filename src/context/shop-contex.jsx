@@ -82,7 +82,17 @@ export const ShopcontexProvider = (props) => {
       console.log(error);
     }
   };
-
+  const searchItem = async (name) => {
+    try {
+      setLoding(true);
+    const res = await fetch(`https://dummyjson.com/products/search?q=${name}`)
+ const data = await res.json();
+      setResponseData(data);
+      setLoding(false);
+  }catch (error) {
+      console.log(error);
+    }
+}
   const getTotalItem = () => {
     let totalItemNumber = 0;
 
@@ -109,6 +119,7 @@ export const ShopcontexProvider = (props) => {
     getTotal,
     ProductItem,
     getTotalItem,
+    searchItem
   };
   return (
     <Shopcontex.Provider value={contexvalue}>
