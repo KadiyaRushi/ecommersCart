@@ -54,7 +54,7 @@ export const Shop = () => {
           onChange={handalChange}
         />
       </div>
-      // page Buttons
+      {/* page Buttons*/}
       <div className="pageButton">
         {number <= 1 ? null : (
           <button
@@ -80,7 +80,7 @@ export const Shop = () => {
           </button>
         )}
       </div>
-      //products
+      {/* products */}
       <div className="products">
         {responseData ? (
           responseData?.products?.map((element) => (
@@ -92,7 +92,7 @@ export const Shop = () => {
           <Loder />
         )}
       </div>
-      //page button
+      {/* page Buttons*/}
       <div className="pageButton">
         {number <= 1 ? null : (
           <button
