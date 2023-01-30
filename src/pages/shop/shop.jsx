@@ -4,18 +4,42 @@ import { Product } from "./product";
 import "./shop.css";
 import { Shopcontex } from "../../context/shop-contex";
 import { Loder } from "../../Components/fullpageLoder/Loder";
-import { Form } from "../ProductForm/form";
 
 export const Shop = () => {
-  const [name, setName] = useState('');
-  const { responseData, searchItem } = useContext(Shopcontex);
+  const numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [name, setName] = useState("");
+  const [number, setNumber] = useState(0);
+  const { responseData, searchItem, splitpage } = useContext(Shopcontex);
   const handalChange = (event) => {
- 
-    setName(event.target.value)
-      searchItem(name)
-  }
- 
-  
+    setName(event.target.value);
+    searchItem(name);
+  };
+
+  const numberSetter = (event) => {
+    const num = event.currentTarget.id;
+    setNumber(num);
+  };
+  const numberDecriser = (e) => {
+    const num = e.currentTarget.id - 1;
+    setNumber(num);
+  };
+  const numberInecriser = (e) => {
+    console.log(Number(e.currentTarget.id) + 1);
+
+    const num = Number(e.currentTarget.id) + 1;
+    setNumber(num);
+  };
+  const pagechangeHandler = () => {
+    if (number == 1) {
+      splitpage(0);
+    } else {
+      const num = number * 10;
+      splitpage(num);
+    }
+  };
+  useEffect(() => {
+    pagechangeHandler();
+  }, [number]);
 
   return (
     <div className="shop">
@@ -23,9 +47,29 @@ export const Shop = () => {
         <h1>PedroTech Shop</h1>
       </div>
       <div>
-        <input placeholder="search" onChange={handalChange} />
-   
-</div>
+        <input
+          placeholder="search product hear"
+          className="searchOfMainPage"
+          onChange={handalChange}
+        />
+      </div>
+      <div className="pageButton">
+        {number <= 1 ? null : (
+          <button onClick={numberDecriser} id={number}>
+            &larr;
+          </button>
+        )}
+        {numberArray.map((num) => (
+          <button onClick={numberSetter} id={num}>
+            {num}
+          </button>
+        ))}
+        {number >= 9 ? null : (
+          <button onClick={numberInecriser} id={number}>
+            &rarr;
+          </button>
+        )}
+      </div>
       <div className="products">
         {responseData ? (
           responseData?.products?.map((element) => (
@@ -35,6 +79,23 @@ export const Shop = () => {
           ))
         ) : (
           <Loder />
+        )}
+      </div>
+      <div className="pageButton">
+        {number <= 1 ? null : (
+          <button onClick={numberDecriser} id={number}>
+            &larr;
+          </button>
+        )}
+        {numberArray.map((num) => (
+          <button onClick={numberSetter} id={num}>
+            {num}
+          </button>
+        ))}
+        {number >= 9 ? null : (
+          <button onClick={numberInecriser} id={number}>
+            &rarr;
+          </button>
         )}
       </div>
     </div>
