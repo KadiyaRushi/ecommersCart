@@ -20,6 +20,7 @@ export const Shop = () => {
     setNumber(num);
   };
   const numberDecriser = (e) => {
+    console.log();
     const num = e.currentTarget.id - 1;
     setNumber(num);
   };
@@ -53,9 +54,14 @@ export const Shop = () => {
           onChange={handalChange}
         />
       </div>
+      // page Buttons
       <div className="pageButton">
         {number <= 1 ? null : (
-          <button onClick={numberDecriser} id={number}>
+          <button
+            onClick={numberDecriser}
+            id={number}
+            className="decrymentButton"
+          >
             &larr;
           </button>
         )}
@@ -65,11 +71,16 @@ export const Shop = () => {
           </button>
         ))}
         {number >= 9 ? null : (
-          <button onClick={numberInecriser} id={number}>
+          <button
+            onClick={numberInecriser}
+            id={number}
+            className="increamentButton"
+          >
             &rarr;
           </button>
         )}
       </div>
+      //products
       <div className="products">
         {responseData ? (
           responseData?.products?.map((element) => (
@@ -81,9 +92,14 @@ export const Shop = () => {
           <Loder />
         )}
       </div>
+      //page button
       <div className="pageButton">
         {number <= 1 ? null : (
-          <button onClick={numberDecriser} id={number}>
+          <button
+            onClick={numberDecriser}
+            id={number}
+            className="decrymentButton"
+          >
             &larr;
           </button>
         )}
@@ -93,7 +109,11 @@ export const Shop = () => {
           </button>
         ))}
         {number >= 9 ? null : (
-          <button onClick={numberInecriser} id={number}>
+          <button
+            onClick={numberInecriser}
+            id={number}
+            className="increamentButton"
+          >
             &rarr;
           </button>
         )}
