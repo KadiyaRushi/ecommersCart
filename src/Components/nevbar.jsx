@@ -8,14 +8,12 @@ export const Nevbar = () => {
   return (
     <div className="navbar">
       <div className="links">
-        <Link to="/">Shop</Link>
-        <Link to="/cart">
-          <div>
-            <p>
-              {" "}
-              <ShoppingCart />( {getTotalItem()})
-            </p>
-          </div>
+        <Link to="/" className="shopLink">
+          Shop
+        </Link>
+
+        <Link to="/cart" className="cartLink">
+          <ShoppingCart />({getTotalItem()})
         </Link>
         <Link to="/form">
           <Plus />

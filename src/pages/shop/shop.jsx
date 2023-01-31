@@ -8,7 +8,7 @@ import { Loder } from "../../Components/fullpageLoder/Loder";
 export const Shop = () => {
   const numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [name, setName] = useState("");
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState(1);
   const { responseData, searchItem, splitpage } = useContext(Shopcontex);
   const handalChange = (event) => {
     setName(event.target.value);
@@ -38,6 +38,7 @@ export const Shop = () => {
       splitpage(num);
     }
   };
+
   useEffect(() => {
     pagechangeHandler();
   }, [number]);
@@ -80,6 +81,10 @@ export const Shop = () => {
           </button>
         )}
       </div>
+
+      <div className="pageIndicater">
+        <h2>Page {number} of 9</h2>
+      </div>
       {/* products */}
       <div className="products">
         {responseData ? (
@@ -91,6 +96,10 @@ export const Shop = () => {
         ) : (
           <Loder />
         )}
+      </div>
+      {/* pageNumber showr */}
+      <div className="pageIndicater">
+        <h2>Page {number} of 9</h2>
       </div>
       {/* page Buttons*/}
       <div className="pageButton">

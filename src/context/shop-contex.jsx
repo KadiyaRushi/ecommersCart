@@ -8,7 +8,8 @@ export const ShopcontexProvider = (props) => {
   const [cartItem, setCartItems] = useState([]);
   const [responseData, setResponseData] = useState();
   const [Loding, setLoding] = useState(true);
-const apiLink ="https://dummyjson.com/products"
+
+  const apiLink = "https://dummyjson.com/products";
   const addTocart = (data) => {
     if (!cartItem.find((product) => product.id === Number(data.id))) {
       const product = { ...data, number: 1 };
@@ -85,14 +86,16 @@ const apiLink ="https://dummyjson.com/products"
   const searchItem = async (name) => {
     try {
       setLoding(true);
-    const res = await fetch(`${apiLink}/search?q=${name}`)
- const data = await res.json();
+
+      const res = await fetch(`${apiLink}/search?q=${name}`);
+      const data = await res.json();
       setResponseData(data);
       setLoding(false);
-  }catch (error) {
+    } catch (error) {
       console.log(error);
     }
-}
+  };
+
   const getTotalItem = () => {
     let totalItemNumber = 0;
 
@@ -104,21 +107,20 @@ const apiLink ="https://dummyjson.com/products"
 
     return totalItemNumber;
   };
-  
+
   const splitpage = async (num) => {
     try {
-        setLoding(true);
-      const res = await fetch(`${apiLink}?limit=10&skip=${num}`)
+      setLoding(true);
+      const res = await fetch(`${apiLink}?limit=10&skip=${num}`);
       const data = await res.json();
       setResponseData(data);
       setLoding(false);
     } catch (error) {
       console.log(error);
     }
-}
+  };
   useEffect(() => {
-  
-    splitpage(0)
+    splitpage(0);
   }, []);
 
   const contexvalue = {
@@ -132,7 +134,7 @@ const apiLink ="https://dummyjson.com/products"
     ProductItem,
     getTotalItem,
     searchItem,
-    splitpage
+    splitpage,
   };
   return (
     <Shopcontex.Provider value={contexvalue}>
