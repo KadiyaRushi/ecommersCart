@@ -67,7 +67,15 @@ export const Shop = () => {
           </button>
         )}
         {numberArray.map((num) => (
-          <button onClick={numberSetter} id={num}>
+          <button
+            onClick={numberSetter}
+            id={num}
+            style={
+              number == num
+                ? { backgroundColor: "#eeeebd", border: "0.5px solid #fcfc82" }
+                : null
+            }
+          >
             {num}
           </button>
         ))}
@@ -113,7 +121,15 @@ export const Shop = () => {
           </button>
         )}
         {numberArray.map((num) => (
-          <button onClick={numberSetter} id={num}>
+          <button
+            onClick={numberSetter}
+            id={num}
+            style={
+              number == num
+                ? { backgroundColor: "#eeeebd", border: "0.5px solid #fcfc82" }
+                : null
+            }
+          >
             {num}
           </button>
         ))}
