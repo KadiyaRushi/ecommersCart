@@ -1,21 +1,32 @@
 .navbar {
-  width: 100%;
-  height: 80px;
-  background-color: rgb(19, 19, 19);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+    width: 100%;
+    height: 80px;
+    background-color: rgb(19, 19, 19);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: sticky;
 }
 
 .links {
-  margin-right: 50px;
-  display: flex;
-  align-items: center;
+    margin-right: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.shopLink:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(241, 122, 3, 0.24);
+}
+
+.cartLink:active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(241, 122, 3, 0.24);
 }
 
 .links a {
-  text-decoration: none;
-  color: white;
-  margin-left: 20px;
-  font-size: 25px;
+    text-decoration: none;
+    color: white;
+    margin-left: 20px;
+    font-size: 25px;
 }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./form.css";
@@ -7,7 +8,7 @@ export const Form = () => {
   const [Price, setPrice] = useState();
   const [data, setData] = useState({});
   const [arrofNewData, setarrofNewData] = useState([]);
-
+  const navigate = useNavigate();
   const nameChnagData = (event) => {
     event.preventDefault();
     const newName = event.target.value;

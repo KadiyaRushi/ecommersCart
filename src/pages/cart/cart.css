@@ -9,7 +9,6 @@
   width: 700px;
   height: 250px;
   display: flex;
-
   align-items: center;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   border-radius: 25px;
@@ -18,10 +17,28 @@
 
 .cartItem img {
   width: 30%;
+  height: 60%;
   border-radius: 10%;
   margin: 20px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
+.cartItem button {
+  width: 40px;
+  height: 30px;
+  background-color: rgb(19, 19, 19);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  margin: 5px;
+  cursor: pointer;
+}
+.cartItem input {
+  width: 40px;
+  text-align: center;
+  font-weight: bolder;
+  background-color: inherit;
+  border: none;
+}
 .cartItem .description {
   width: 100%;
   font-size: 23px;
