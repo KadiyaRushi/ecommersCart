@@ -91,7 +91,7 @@ export const Shop = () => {
       </div>
 
       <div className="pageIndicater">
-        <h2>Page {number} of 9</h2>
+        <p>Page {number} of 9</p>
       </div>
       {/* products */}
       <div className="products">

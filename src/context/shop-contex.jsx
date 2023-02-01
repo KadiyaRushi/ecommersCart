@@ -9,7 +9,7 @@ export const ShopcontexProvider = (props) => {
   const [responseData, setResponseData] = useState();
   const [Loding, setLoding] = useState(true);
 
-  const apiLink = "https://dummyjson.com/products";
+  const apiLink = process.env.REACT_APP_APILINK;
   const addTocart = (data) => {
     if (!cartItem.find((product) => product.id === Number(data.id))) {
       const product = { ...data, number: 1 };
