@@ -4,7 +4,7 @@ import "./Lodeer.css";
 export const Loder = () => {
   return (
     <div className="Loder">
-      <h1>Loding..........................</h1>
+      <h1>Loding..........</h1>
     </div>
   );
 };
