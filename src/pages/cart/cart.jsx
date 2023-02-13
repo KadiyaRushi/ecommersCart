@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./cart.css";
-import { useContext } from "react";
 
-import { Shopcontex } from "../../context/shop-contex";
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getTotal } from "../../store/cartSclice";
 export const Cart = () => {
-  const { cartItem, getTotal } = useContext(Shopcontex);
-  let cartitemNo = cartItem.length;
-
+  const cartItem = useSelector((state) => state.cart.cartItem);
+  let totalAmount = 0;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const getTotal = () => {
+    for (let item in cartItem) {
+      if (cartItem[item].number > 0) {
+        totalAmount += cartItem[item].number * cartItem[item].price;
+      }
+    }
+    return totalAmount;
+  };
+  // useEffect(() => {
+  //   dispatch(getTotal());
+  // }, [totalAmount]);
+
   return (
     <div className="cart">
       <div>
@@ -20,15 +33,15 @@ export const Cart = () => {
           return <CartItem data={product} />;
         })}
       </div>
-      {cartitemNo > 0 ? (
-        <div className="checkout">
-          <p>Subtotal:$ {getTotal()}</p>
-          <button onClick={() => navigate("/")}>Continu Shopping</button>
-          <button>Checkout</button>
-        </div>
-      ) : (
-        <h1>Your Cart Is Empty</h1>
-      )}
+
+      <div className="checkout">
+        <p>
+          Subtotal:$
+          {getTotal()}
+        </p>
+        <button onClick={() => navigate("/")}>Continu Shopping</button>
+        <button>Checkout</button>
+      </div>
     </div>
   );
 };

@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { Plus, ShoppingCart } from "phosphor-react";
 import { Shopcontex } from "../context/shop-contex";
 import "./nevbar.css";
+import { useSelector } from "react-redux";
 export const Nevbar = () => {
-  const { getTotalItem } = useContext(Shopcontex);
+  const cartItem = useSelector((state) => state.cart.cartItem);
   return (
     <div className="navbar">
       <div className="links">
@@ -13,7 +14,7 @@ export const Nevbar = () => {
         </Link>
 
         <Link to="/cart" className="cartLink">
-          <ShoppingCart />({getTotalItem()})
+          <ShoppingCart />({cartItem.length})
         </Link>
         <Link to="/form">
           <Plus />

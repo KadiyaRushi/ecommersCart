@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
-import { Shopcontex } from "../../context/shop-contex";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addTocart, removeFromcart } from "../../store/cartSclice";
 export const CartItem = (props) => {
   const { id, title, price, images, description } = props.data;
-  const { cartItem, addTocart, removeFromcart, adduserInputnumber } =
-    useContext(Shopcontex);
+  const cartItem = useSelector((state) => state.cart.cartItem);
   const productIndex = cartItem.findIndex((obj) => obj.id == id);
 
+  const dispatch = useDispatch();
   return (
     <div className="cartItem">
       <img src={images[0]} />
@@ -20,20 +22,15 @@ export const CartItem = (props) => {
         <div>
           <button
             onClick={() => {
-              addTocart(props.data);
+              dispatch(addTocart(props.data));
             }}
           >
             +
           </button>
-          <input
-            value={cartItem[productIndex].number}
-            onChange={(e) => {
-              adduserInputnumber(props.data, Number(e.target.value));
-            }}
-          />
+          <input value={cartItem[productIndex].number || ""} />
           <button
             onClick={() => {
-              removeFromcart(props.data);
+              dispatch(removeFromcart(props.data));
             }}
           >
             -

@@ -1,48 +1,48 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Product } from "./product";
 import "./shop.css";
 import { Shopcontex } from "../../context/shop-contex";
 import { Loder } from "../../Components/fullpageLoder/Loder";
+import { useDispatch, useSelector } from "react-redux";
+import { ProductItem, searchItem, splitpage } from "../../store/shopSclice";
 
 export const Shop = () => {
   const numberArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [name, setName] = useState("");
   const [number, setNumber] = useState(1);
-  const { responseData, searchItem, splitpage } = useContext(Shopcontex);
+  const dispatch = useDispatch();
+
+  const responseData = useSelector((state) => state.shop.responseData);
+
   const handalChange = (event) => {
     setName(event.target.value);
-    searchItem(name);
+    dispatch(searchItem(name));
   };
 
   const numberSetter = (event) => {
     const num = event.currentTarget.id;
-    setNumber(num);
+    dispatch(setNumber(num));
   };
   const numberDecriser = (e) => {
-    console.log();
     const num = e.currentTarget.id - 1;
-    setNumber(num);
+    dispatch(setNumber(num));
   };
   const numberInecriser = (e) => {
-    console.log(Number(e.currentTarget.id) + 1);
-
     const num = Number(e.currentTarget.id) + 1;
-    setNumber(num);
+    dispatch(setNumber(num));
   };
   const pagechangeHandler = () => {
     if (number == 1) {
-      splitpage(0);
+      dispatch(splitpage(number));
     } else {
       const num = number * 10;
-      splitpage(num);
+      dispatch(splitpage(num));
     }
   };
-
   useEffect(() => {
     pagechangeHandler();
   }, [number]);
-
   return (
     <div className="shop">
       <div className="shopTitle">
@@ -96,9 +96,9 @@ export const Shop = () => {
       {/* products */}
       <div className="products">
         {responseData ? (
-          responseData?.products?.map((element) => (
+          responseData?.products?.map((product) => (
             <div>
-              <Product data={element} />
+              <Product data={product} />
             </div>
           ))
         ) : (
